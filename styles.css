@@ -1,0 +1,32 @@
+body{
+    background-color: #c3c3c3;
+    text-align: center;
+    font-family: monospace;
+    font-size: x-large;
+    text-align: center;
+}
+
+#canvas {
+    background-color: #29B6F6;
+    border-radius: 10px;
+    margin: 10px;
+        
+}
+
+#reset {
+    background-color: #29B6F6; /* Green */
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#reset:hover {
+    background-color: white; /* Green */
+    color: black;
+    border: 2px solid #29B6F6;
+}
+
