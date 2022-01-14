@@ -11,11 +11,30 @@
 </head>
 
 <body>
-  <div class="wrapper">
+  <nav class="Menu">
+    <form method="post">
+      <input type="checkbox" id="activateAI" name="activateAI" value="activateAI">
+      <label for="activateAI">Activer l'IA</label>
+    </form>
+    <form method="post">
+      <legend>Starting Player</legend>
+      <div>
+        <input type="radio" id="player1" value="player1" name="joueur">
+        <label for="player1">Player 1</label>
+      </div>
+      <div>
+        <input type="radio" id="player2" value="player1" name="joueur">
+        <label for="player2">Player 2</label>
+      </div>
+    </form>
+  </nav>
+  <section class="wrapper">
     <h1>PUISSANCE 4</h1>
-    <canvas id="canvas"></canvas><br>
-    <button id="reset">Recommencer</button>
-  </div>
+    <canvas id="Board"></canvas>
+    <div id="btn">
+      <button id="reset">Recommencer</button>
+    </div>
+  </section>
   <script src="connect-4-test.js" defer></script>
 
 </body>
