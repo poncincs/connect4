@@ -49,25 +49,29 @@ class View {
             }
             this.ctxGameBoard.beginPath();
         }
-        
+        drawToken(this.ctxTokens, 0,0, "red");
+
+
         div.appendChild(this.p_tag);
         div.appendChild(this.gameBoard);
         div.appendChild(this.tokens);
         div.appendChild(buttonReset);
+
     }
 
     addController() {
         this.tokens.addEventListener("mousemove", (e) => {
           let posX = Math.floor((e.clientX - this.tokens.offsetLeft) / this.squareSize);
-          if (!endGame) {
+          console.log(posX);
+          if (1) {
             clearTopRow();
-            drawTile(posX, 0, playerTurn);
+            drawToken(this.ctxTokens, posX,0, "red");
           };
         });
         this.tokens.addEventListener("click", (e) => {
           let clickX = Math.floor((e.clientX - this.tokens.offsetLeft) / this.squareSize)
           if (!endGame) {
-            for (y = this.rows - 1; y >= 0; y--) {
+            for (var y = this.rows - 1; y >= 0; y--) {
               if (boardArray[y][clickX] == 0) {
                 playMove(clickX, y);
                 break;
@@ -78,7 +82,7 @@ class View {
     }
 
     grid(){
-        
+
     }
 }
 
