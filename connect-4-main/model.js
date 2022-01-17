@@ -1,6 +1,6 @@
 class Model {
     constructor() {
-      this.URL = 'https://api.chucknorris.io/jokes/random';
+      // this.URL = location.reload();
     }
   
     // Binding.
@@ -23,4 +23,6 @@ class Model {
           console.log("Error : " + error);
         });
     }
+
+    
   }

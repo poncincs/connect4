@@ -4,7 +4,7 @@ body{
     font-size: x-large;
 }
 .wrapper h1 {
-    margin: 10px;
+    margin: auto;
     float: inline-start;
 }
 
@@ -24,7 +24,7 @@ nav {
 section {
     float:left;
     padding: 20px;
-    margin: auto;
+    text-align: center;
     border-radius: 12px;
     background-color:#eeeeee;
 }
@@ -35,12 +35,11 @@ section {
 }
 
 .wrapper button {
-    background-color: #29B6F6; /* Green */
+    background-color: #29B6F6; /* Green*/
     border: 2px solid #29B6F6;
     border-radius: 12px;
     color: white;
     padding: 15px 32px;
-    text-align: center;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
@@ -53,18 +52,18 @@ section {
 }
 
 #gameBoard {
-    position: relative;
+    position: absolute;
     border-radius: 10px;
-    margin: auto;
+    margin: 10px;
     display: block;
     background: transparent;
     z-index: 1;
 }
 
 #tokens{
-    position: absolute;
+    position: relative;
     border-radius: 10px;
-    margin: auto;
+    margin: 10px;
     display: block;
     background-color: transparent;
     z-index: 0;
