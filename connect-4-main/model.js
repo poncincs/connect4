@@ -1,6 +1,7 @@
 class Model {
   constructor() {
     this.matrix = this.initializeMatrice
+      this.player = 0;
   }
 
   // Binding.
@@ -38,5 +39,7 @@ class Model {
     return matrix;
   };
 
-  
+    setMatrix(columns, rows) {
+        this.matrix[columns][rows] = this.player;
+    };
 }
