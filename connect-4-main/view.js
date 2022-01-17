@@ -13,6 +13,7 @@ class View {
         this.ctxTokens = this.tokens.getContext("2d");
         this.initView();
         this.addController();
+
     }
 
     // Binding.
@@ -24,6 +25,8 @@ class View {
         let div = document.querySelector(`#${this.div_id}`);
         this.p_tag = document.createElement('h1');
         this.p_tag.innerHTML = 'PUISSANCE 4';
+
+        this.canvas = document.createElement('div');
 
         let buttonReset = document.createElement('button');
         buttonReset.innerHTML = 'Recommencer';
@@ -39,7 +42,7 @@ class View {
 
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, 0 + this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
-        
+
         for (var i = 0; i < this.rows; i++) {
             for (var y = 0; y < this.columns; y++) {
                 this.ctxGameBoard.globalCompositeOperation = 'destination-out';
@@ -49,7 +52,7 @@ class View {
             }
             this.ctxGameBoard.beginPath();
         }
-        drawToken(this.ctxTokens, 0,0, "red");
+        drawToken(this.ctxTokens, 0, 0, "red");
 
 
         div.appendChild(this.p_tag);
@@ -59,30 +62,20 @@ class View {
 
     }
 
+
     addController() {
-        this.tokens.addEventListener("mousemove", (e) => {
-          let posX = Math.floor((e.clientX - this.tokens.offsetLeft) / this.squareSize);
-          console.log(posX);
-          if (1) {
-            clearTopRow();
-            drawToken(this.ctxTokens, posX,0, "red");
-          };
-        });
-        this.tokens.addEventListener("click", (e) => {
-          let clickX = Math.floor((e.clientX - this.tokens.offsetLeft) / this.squareSize)
-          if (!endGame) {
-            for (var y = this.rows - 1; y >= 0; y--) {
-              if (boardArray[y][clickX] == 0) {
-                playMove(clickX, y);
-                break;
-              }
-            }
-          }
-        });
-    }
 
-    grid(){
+    var position;
+        this.gameBoard.addEventListener("mousemove",function (){
+            position = parseInt(event.layerX / 60);
+            console.log(position);
 
+            drawToken(this.ctxTokens, position, 4, "red");
+
+        } );
+        console.log("je suis la");
+
+        drawToken(this.ctxTokens, position, 4, "red");
     }
 }
 
@@ -91,3 +84,4 @@ function drawToken(ctx, x, y, color){
     ctx.fillStyle = color;
     ctx.fill();
 };
+
