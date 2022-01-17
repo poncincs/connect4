@@ -15,6 +15,9 @@ class Controller {
   
       this.bindGetCNF = this.bindGetCNF.bind(this);
       this.view.bindGetCNF(this.bindGetCNF);
+
+      this.bindRender = this.bindRender.bind(this);
+      this.model.bindRender(this.binderRender);
     }
     
     bindDisplayCNF (cnf_value) {
@@ -23,5 +26,9 @@ class Controller {
   
     bindGetCNF () {
       this.model.getCNF();
+    }
+
+    bindRender(){
+      this.view.grid();
     }
   }
