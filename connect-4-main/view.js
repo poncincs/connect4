@@ -26,8 +26,6 @@ class View {
         this.p_tag = document.createElement('h1');
         this.p_tag.innerHTML = 'PUISSANCE 4';
 
-        this.canvas = document.createElement('div');
-
         let buttonReset = document.createElement('button');
         buttonReset.innerHTML = 'Recommencer';
         buttonReset.addEventListener('click', () => {
@@ -52,36 +50,44 @@ class View {
             }
             this.ctxGameBoard.beginPath();
         }
-        drawToken(this.ctxTokens, 0, 0, "red");
-
 
         div.appendChild(this.p_tag);
         div.appendChild(this.gameBoard);
         div.appendChild(this.tokens);
         div.appendChild(buttonReset);
 
+        console.log("je suis la");
+        //clearTopRow(this.ctxTokens);
+        console.log("je suis lala");
+
     }
 
 
     addController() {
-
-    var position;
+        var position;
         this.gameBoard.addEventListener("mousemove",function (){
             position = parseInt(event.layerX / 60);
             console.log(position);
 
-            drawToken(this.ctxTokens, position, 4, "red");
 
         } );
+        clearTopRow(this.ctxTokens);
+        drawToken(this.ctxTokens, 2, 0, "red");
         console.log("je suis la");
 
-        drawToken(this.ctxTokens, position, 4, "red");
+        console.log("je suis lala");
     }
+
+
 }
 
 function drawToken(ctx, x, y, color){
-    ctx.arc(2 * x * 30 + 30, 2 * y * 30 + 30 + 60, 20, 0, Math.PI * 2)
+    ctx.arc(2 * x * 30 + 30, 2 * y * 30 + 30, 20, 0, Math.PI * 2)
     ctx.fillStyle = color;
     ctx.fill();
 };
 
+
+function clearTopRow(ctx){
+    ctx.clearRect(0,0, 420, 60);
+}
