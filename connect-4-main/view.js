@@ -37,17 +37,23 @@ class View {
         this.tokens.height = this.squareSize * this.rows;
         this.tokens.width = this.squareSize * (this.columns + 1);
 
+        this.ctxGameBoard.fillStyle = "blue";
+        this.ctxGameBoard.fillRect(0, 0 + this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
+        
+        for (var i = 0; i < this.rows; i++) {
+            for (var y = 0; y < this.columns; y++) {
+                this.ctxGameBoard.globalCompositeOperation = 'destination-out';
+                this.ctxGameBoard.arc(2 * i * this.circleRayon + this.circleRayon, 2 * y * this.circleRayon + this.circleRayon + this.squareSize, this.tokenSize, 0, Math.PI * 2)
+                this.ctxGameBoard.fill();
+                this.ctxGameBoard.closePath();
+            }
+            this.ctxGameBoard.beginPath();
+        }
         
         div.appendChild(this.p_tag);
         div.appendChild(this.gameBoard);
         div.appendChild(this.tokens);
         div.appendChild(buttonReset);
-    }
-
-    displayCNF(cnf_value) {
-        if (this.p_tag) {
-            this.p_tag.innerHTML = cnf_value;
-        }
     }
 
     addController() {
@@ -72,18 +78,7 @@ class View {
     }
 
     grid(){
-        this.ctxGameBoard.fillStyle = "blue";
-        this.ctxGameBoard.fillRect(0, 0 + this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
         
-        for (var i = 0; i < this.rows; i++) {
-            for (var y = 0; y < this.columns; y++) {
-                this.ctxGameBoard.globalCompositeOperation = 'destination-out';
-                this.ctxGameBoard.arc(2 * i * this.circleRayon + this.circleRayon, 2 * y * this.circleRayon + this.circleRayon + this.squareSize, this.tokenSize, 0, Math.PI * 2)
-                this.ctxGameBoard.fill();
-                this.ctxGameBoard.closePath();
-            }
-            this.ctxGameBoard.beginPath();
-        }
     }
 }
 
@@ -91,5 +86,4 @@ function drawToken(ctx, x, y, color){
     ctx.arc(2 * x * 30 + 30, 2 * y * 30 + 30 + 60, 20, 0, Math.PI * 2)
     ctx.fillStyle = color;
     ctx.fill();
-
 };
