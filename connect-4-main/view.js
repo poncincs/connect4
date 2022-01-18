@@ -41,6 +41,8 @@ class View {
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, 0 + this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
 
+
+
         for (var i = 0; i < this.rows; i++) {
             for (var y = 0; y < this.columns; y++) {
                 this.ctxGameBoard.globalCompositeOperation = 'destination-out';
@@ -56,9 +58,8 @@ class View {
         div.appendChild(this.tokens);
         div.appendChild(buttonReset);
 
-        console.log("je suis la");
         //clearTopRow(this.ctxTokens);
-        console.log("je suis lala");
+
 
     }
 
@@ -68,26 +69,31 @@ class View {
         this.gameBoard.addEventListener("mousemove",function (){
             position = parseInt(event.layerX / 60);
             console.log(position);
-
-
         } );
-        clearTopRow(this.ctxTokens);
-        drawToken(this.ctxTokens, 2, 0, "red");
-        console.log("je suis la");
 
-        console.log("je suis lala");
+        this.gameBoard.addEventListener("click",function (){
+            position = parseInt(event.layerX / 60);
+            console.log(position*2);
+            this.drawToken(position, 3, "red");
+        } );
+
+
     }
+
+    drawToken(x, y, color){
+        this.ctxTokens.arc(2 * x * 30 + 30, 2 * y * 30 + 30, 20, 0, Math.PI * 2)
+        console.log("yooo");
+
+        this.ctxTokens.fillStyle = color;
+        this.ctxTokens.fill();
+    };
 
 
 }
 
-function drawToken(ctx, x, y, color){
-    ctx.arc(2 * x * 30 + 30, 2 * y * 30 + 30, 20, 0, Math.PI * 2)
-    ctx.fillStyle = color;
-    ctx.fill();
-};
 
 
-function clearTopRow(ctx){
-    ctx.clearRect(0,0, 420, 60);
+
+function clearTopRow(){
+    this.ctxTokens.clearRect(0,0, 420, 60);
 }

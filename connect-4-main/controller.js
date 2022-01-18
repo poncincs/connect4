@@ -21,6 +21,9 @@ class Controller {
 
     this.bindSetMatrix = this.bindSetMatrix.bind(this);
     this.model.bindRender(this.bindSetMatrix);
+
+    this.bindInitializeMatrix = this.bindInitializeMatrix(this);
+    this.model.bindRender(this.bindInitializeMatrix);
   }
 
   bindDisplayCNF(cnf_value) {
@@ -37,5 +40,8 @@ class Controller {
 
   bindRender() {
     this.view.grid();
+  }
+  bindInitializeMatrix() {
+    this.model.initializeMatrix();
   }
 }
