@@ -18,7 +18,7 @@ class View {
   // Binding.
   bindChangePlayer(callback) {
     this.changePlayer = callback; // On veut pouvoir demander au Model (depuis le Controller) une nouvelle Chuck Norris Fact.
-  }
+  } 
 
   initView() {
     let div = document.querySelector(`#${this.div_id}`);

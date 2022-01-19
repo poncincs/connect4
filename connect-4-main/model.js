@@ -21,7 +21,7 @@ class Model {
   }
 
   bindRenderPlayer(callback) {
-    this.renderPlayer = callback;
+    this.renderPlayer = callback; 
   }
 
   // getCNF() {

@@ -41,7 +41,7 @@ class Controller {
     this.model.setmatrix();
   }
 
-  bindRender() {
+  bindRender() { 
     this.view.grid();
   }
 
