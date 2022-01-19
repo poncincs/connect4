@@ -53,8 +53,8 @@ section {
 
 #gameBoard {
     position: absolute;
-    border-radius: 10px;
     margin: 10px;
+    border-radius: 12px;
     display: block;
     background: transparent;
     z-index: 1;
@@ -62,9 +62,10 @@ section {
 
 #tokens{
     position: relative;
-    border-radius: 10px;
     margin: 10px;
+    border-radius: 12px;
     display: block;
     background-color: transparent;
     z-index: 0;
 }
+

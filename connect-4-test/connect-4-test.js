@@ -61,27 +61,13 @@ function draw() {
   ctx.fillRect(0, 0 + squareSize, boardW * squareSize, boardH * squareSize);
   ctx.setLineDash([5, 10]);
   for (y = 0; y < boardH; y++) {
-    
+
     for (x = 0; x < boardW; x++) {
       rectArrondi(ctx, 8, 8, 40, 40, 10);
       drawTile(x, y + 1, boardArray[y][x]);
     }
   }
 }
-
-// function rectArrondi(ctx, x, y, largeur, hauteur, rayon) {
-//   ctx.beginPath();
-//   ctx.moveTo(x, y + rayon);
-//   ctx.lineTo(x, y + hauteur - rayon);
-//   ctx.quadraticCurveTo(x, y + hauteur, x + rayon, y + hauteur);
-//   ctx.lineTo(x + largeur - rayon, y + hauteur);
-//   ctx.quadraticCurveTo(x + largeur, y + hauteur, x + largeur, y + hauteur - rayon);
-//   ctx.lineTo(x + largeur, y + rayon);
-//   ctx.quadraticCurveTo(x + largeur, y, x + largeur - rayon, y);
-//   ctx.lineTo(x + rayon,y);
-//   ctx.quadraticCurveTo(x, y, x, y + rayon);
-//   ctx.stroke();
-// }
 
 function drawTile(x, y, tileColor) {
   let centerX = (x * squareSize) + (squareSize / 2);
@@ -91,8 +77,6 @@ function drawTile(x, y, tileColor) {
   ctx.arc(centerX, centerY, tileSize, 0, 25 * Math.PI);
   ctx.fillStyle = color.player[tileColor];
   ctx.fill();
-
-
 }
 
 function addController() {

@@ -13,22 +13,28 @@ class Controller {
     this.bindDisplayCNF = this.bindDisplayCNF.bind(this);
     this.model.bindDisplayCNF(this.bindDisplayCNF);
 
-    this.bindGetCNF = this.bindGetCNF.bind(this);
-    this.view.bindGetCNF(this.bindGetCNF);
+    this.bindChangePlayer = this.bindChangePlayer.bind(this);
+    this.view.bindChangePlayer(this.bindChangePlayer);
 
     this.bindRender = this.bindRender.bind(this);
     this.model.bindRender(this.bindRender);
 
     this.bindSetMatrix = this.bindSetMatrix.bind(this);
     this.model.bindRender(this.bindSetMatrix);
+
+    this.bindInitializeMatrix = this.bindInitializeMatrix.bind(this);
+    this.model.bindRender(this.bindInitializeMatrix);
+
+    this.bindRenderPlayer = this.bindRenderPlayer.bind(this);
+    this.model.bindRenderPlayer(this.bindRenderPlayer);
   }
 
   bindDisplayCNF(cnf_value) {
     this.view.displayCNF(cnf_value);
   }
 
-  bindGetCNF() {
-    this.model.getCNF();
+  bindChangePlayer() {
+    this.model.changePlayer();
   }
 
   bindSetMatrix() {
@@ -37,5 +43,17 @@ class Controller {
 
   bindRender() {
     this.view.grid();
+  }
+
+  bindInitializeMatrix() {
+    this.model.initializeMatrix();
+  }
+
+  bindSetMatrix() {
+    this.model.setMatrix();
+  }
+
+  bindRenderPlayer(player) {
+    this.view.renderPlayer(player);
   }
 }
