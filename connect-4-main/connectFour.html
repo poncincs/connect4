@@ -11,36 +11,36 @@
 </head>
 
 <body>
-    <nav class="Menu"> 
-        <form method="post">
-            <input type="checkbox" id="activateAI" name="activateAI" value="activateAI">
-            <label for="activateAI">Activer l'IA</label>
-        </form>
-        <form method="post">
-            <legend>Starting Player</legend>
-            <div>
-                <input type="radio" id="player1" value="player1" name="joueur">
-                <label for="player1">Player 1</label>
-            </div>
-            <div>
-                <input type="radio" id="player2" value="player1" name="joueur">
-                <label for="player2">Player 2</label>
-            </div>
-        </form>
-    </nav>
-    <section class="wrapper" >
-        <div id="mvc">
-            <canvas id="tokens"></canvas>
-            <canvas id="gameBoard"></canvas>
+<nav class="Menu">
+    <form method="post">
+        <input type="checkbox" id="activateAI" name="activateAI" value="activateAI">
+        <label for="activateAI">Activer l'IA</label>
+    </form>
+    <form method="post">
+        <legend>Starting Player</legend>
+        <div>
+            <input type="radio" id="player1" value="player1" name="joueur">
+            <label for="player1">Player 1</label>
         </div>
-    </section>
-    <script src="controller.js" charset="utf-8"></script>
-    <script src="model.js" charset="utf-8"></script>
-    <script src="view.js" charset="utf-8"></script>
+        <div>
+            <input type="radio" id="player2" value="player1" name="joueur">
+            <label for="player2">Player 2</label>
+        </div>
+    </form>
+</nav>
+<section class="wrapper">
+    <div id="mvc">
+        <canvas id="tokens"></canvas>
+        <canvas id="gameBoard"></canvas>
+    </div>
+</section>
+<script src="controller.js" charset="utf-8"></script>
+<script src="model.js" charset="utf-8"></script>
+<script src="view.js" charset="utf-8"></script>
 
-    <script>
-        const app = new Controller(new Model(), new View('mvc'));
-    </script>
+<script>
+    const app = new Controller(new Model(), new View('mvc'));
+</script>
 </body>
 
 </html>
