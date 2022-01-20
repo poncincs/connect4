@@ -19,7 +19,15 @@ class View {
   // Binding.
   bindChangePlayer(callback) {
     this.changePlayer = callback; // On veut pouvoir demander au Model (depuis le Controller) une nouvelle Chuck Norris Fact.
-  } 
+  }
+
+  bindSetMatrix(callback) {
+    this.setMatrix = callback;
+  }
+
+  bindAddToken(callback) {
+    this.addToken = callback;
+  }
 
   initView() {
     let div = document.querySelector(`#${this.div_id}`);
@@ -76,8 +84,9 @@ class View {
       this.drawToken(position, 0, "red");
     });
     this.gameBoard.addEventListener("click", (e) => {
-      let clickX = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize)
-      this.drawToken(clickX, 3, "red");
+      let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
+      this.
+      this.drawToken(position, 3, "red");
     });
   }
 
@@ -85,13 +94,12 @@ class View {
     this.ctxTokens.clearRect(0, 0, 420, 60);
   }
 
-  renderPlayer(player){
+  renderPlayer(player) {
     if (player == 0) {
       this.color = "red";
-    }else{
+    } else {
       this.color = "yellow"
     }
     return this.color;
   }
 }
-

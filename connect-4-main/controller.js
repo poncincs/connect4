@@ -20,13 +20,16 @@ class Controller {
     this.model.bindRender(this.bindRender)*/;
 
     this.bindSetMatrix = this.bindSetMatrix.bind(this);
-    this.model.bindRender(this.bindSetMatrix);
+    this.view.bindSetMatrix(this.bindSetMatrix);
 
     this.bindInitializeMatrix = this.bindInitializeMatrix.bind(this);
     this.model.bindRender(this.bindInitializeMatrix);
 
     this.bindRenderPlayer = this.bindRenderPlayer.bind(this);
     this.model.bindRenderPlayer(this.bindRenderPlayer);
+
+    this.bindAddToken = this.bindAddToken.bind(this);
+    this.view.bindAddToken(this.bindAddToken);
   }
 
   bindDisplayCNF(cnf_value) {
@@ -41,7 +44,7 @@ class Controller {
     this.model.setmatrix();
   }
 
-  bindRender() { 
+  bindRender() {
     this.view.grid();
   }
 
@@ -55,5 +58,9 @@ class Controller {
 
   bindRenderPlayer(player) {
     this.view.renderPlayer(player);
+  }
+
+  bindAddToken(column){
+    this.model.addToken(column);
   }
 }
