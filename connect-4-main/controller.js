@@ -16,8 +16,8 @@ class Controller {
     this.bindChangePlayer = this.bindChangePlayer.bind(this);
     this.view.bindChangePlayer(this.bindChangePlayer);
 
-    this.bindRender = this.bindRender.bind(this);
-    this.model.bindRender(this.bindRender);
+    /*this.bindRender = this.bindRender.bind(this);
+    this.model.bindRender(this.bindRender)*/;
 
     this.bindSetMatrix = this.bindSetMatrix.bind(this);
     this.model.bindRender(this.bindSetMatrix);
