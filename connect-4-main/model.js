@@ -101,15 +101,15 @@ class Model {
     }
 
     addToken(column){
-      let i = 0;
+      let i = 6;
       do {
         if (this.matrix[i][column] === 0){
           this.setMatrix(i,column);
           return 0;
-        }else if (i === 7){
+        }else if (i === 0){
           return 1;
         } else{
-          i++
+          i--
         }
       }while (1);
 

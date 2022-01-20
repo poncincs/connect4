@@ -60,7 +60,7 @@ class Controller {
     this.view.renderPlayer(player);
   }
 
-  bindAddToken(column){
+  bindAddToken(column) {
     this.model.addToken(column);
   }
 }
