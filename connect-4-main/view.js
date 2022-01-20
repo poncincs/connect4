@@ -86,9 +86,8 @@ class View {
     this.gameBoard.addEventListener("click", (e) => {
       let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
       
-      let y = this.addToken(position);
-      console.log(y);
-      this.drawToken(position, y , "red");
+      this.addToken(position);
+      this.drawToken(position, 3 , "red");
     });
   }
 

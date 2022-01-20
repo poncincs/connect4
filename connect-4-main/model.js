@@ -103,7 +103,6 @@ class Model {
 
   addToken(column) {
     let i = 5;
-
     console.log(this.matrix);
     do {
       if (this.matrix[i][column] === 0) {
