@@ -1,7 +1,6 @@
 class View {
   constructor(div_id) {
     this.div_id = div_id;
-    this.p_tag;
     this.squareSize = 60;
     this.rows = 7;
     this.columns = 6;
@@ -45,7 +44,7 @@ class View {
 
     this.tokens.height = this.squareSize * this.rows;
     this.tokens.width = this.squareSize * (this.columns + 1);
-
+//on veut pouvoir demander au model
 
     this.ctxGameBoard.fillStyle = "blue";
     this.ctxGameBoard.fillRect(0, this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
@@ -97,7 +96,7 @@ class View {
   }
 
   renderPlayer(player) {
-    if (player == 0) {
+    if (player === 0) {
       this.color = "red";
     } else {
       this.color = "yellow"
