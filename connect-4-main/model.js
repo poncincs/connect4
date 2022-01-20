@@ -15,7 +15,7 @@ class Model {
     this.DisplayCNF = callback; // On veut pouvoir actualiser la View (depuis le Controller) quand nous récupérons les données.
   }
 
-  bindRender(callback) {
+  bindRenderPlayer(callback) {
     this.render = callback;
   }
 
