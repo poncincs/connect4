@@ -85,8 +85,6 @@ class View {
     });
     this.gameBoard.addEventListener("click", (e) => {
       let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-      
-      this.addToken(position);
       this.drawToken(position, 3, "red");
     });
   }
