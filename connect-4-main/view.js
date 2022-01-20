@@ -72,7 +72,6 @@ class View {
   addController() {
     this.gameBoard.addEventListener("mousemove", (e) => {
       let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-      console.log(position)
       this.clearTopRow();
       this.drawToken(position, 0, "red");
     });
