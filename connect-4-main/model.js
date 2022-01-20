@@ -84,10 +84,9 @@ class Model {
         do {
             if (this.matrix[i][column] === 0) {
                 this.setMatrix(column, i);
-
-                return 0;
+                return i;
             } else if (i === 0) {
-                return 1;
+                return 567890;
             } else {
                 i--
             }

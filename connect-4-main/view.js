@@ -87,7 +87,7 @@ class View {
 
             let y = this.addToken(position);
             console.log(y);
-            this.drawToken(position, y, "red");
+            this.drawToken(position, y+1, "red");
         });
     }
 

@@ -58,6 +58,6 @@ class Controller {
     }
 
     bindAddToken(column) {
-        this.model.addToken(column);
+        return this.model.addToken(column);
     }
 }
