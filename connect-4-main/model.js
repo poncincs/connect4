@@ -19,6 +19,10 @@ class Model {
     this.render = callback;
   }
 
+  bindRenderPlayer(callback){
+    this.bindRenderPlayer = callback;
+  }
+
   getCNF() {
     fetch(this.URL)
       .then(response => response.json())

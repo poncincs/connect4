@@ -60,9 +60,9 @@ class View {
   }
 
   drawToken(x, y, color) {
-    let centerX = (x * squareSize) + (squareSize / 2);
-    let centerY = (y * squareSize) + (squareSize / 2);
-    let tileSize = (squareSize * 0.8) / 2;
+    let centerX = (x * this.squareSize) + (this.squareSize / 2);
+    let centerY = (y * this.squareSize) + (this.squareSize / 2);
+    let tileSize = (this.squareSize * 0.8) / 2;
     this.ctxTokens.beginPath();
     this.ctxTokens.fillStyle = color;
     this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
@@ -73,12 +73,12 @@ class View {
     this.gameBoard.addEventListener("mousemove", (e) => {
       let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
       console.log(position)
-      clearTopRow();
-      drawToken(position, 0, "red");
+      this.clearTopRow();
+      this.drawToken(position, 0, "red");
     });
     this.gameBoard.addEventListener("click", (e) => {
-      let clickX = Math.floor((e.clientX - c.offsetLeft) / squareSize)
-      drawToken(clickX, 3, "red");
+      let clickX = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize)
+      this.drawToken(clickX, 3, "red");
     });
   }
 
