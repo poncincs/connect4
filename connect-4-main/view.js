@@ -5,6 +5,7 @@ class View {
     this.squareSize = 60;
     this.rows = 7;
     this.columns = 6;
+    this.color = "red";
     this.circleRayon = this.squareSize / 2;
     this.tokenSize = this.squareSize / 3;
     this.gameBoard = document.getElementById("gameBoard");
@@ -59,32 +60,39 @@ class View {
   }
 
   drawToken(x, y, color) {
+    let centerX = (x * squareSize) + (squareSize / 2);
+    let centerY = (y * squareSize) + (squareSize / 2);
+    let tileSize = (squareSize * 0.8) / 2;
     this.ctxTokens.beginPath();
     this.ctxTokens.fillStyle = color;
-    this.ctxTokens.arc(2 * x * 30 + 30, 2 * y * 30 + 30, 20, 0, Math.PI * 2)
-    console.log("yooo");
+    this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
     this.ctxTokens.fill();
   }
 
   addController() {
     this.gameBoard.addEventListener("mousemove", (e) => {
       let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-      console.log(position);
-      this.drawToken(position, 0, "red");
+      console.log(position)
       clearTopRow();
+      drawToken(position, 0, "red");
     });
-    // this.gameBoard.addEventListener("click", (e) => {
-    //   let clickX = Math.floor((e.clientX - c.offsetLeft) / squareSize)
-    //   this.drawToken(clickX, 3, "red");
-    // });
+    this.gameBoard.addEventListener("click", (e) => {
+      let clickX = Math.floor((e.clientX - c.offsetLeft) / squareSize)
+      drawToken(clickX, 3, "red");
+    });
   }
 
   clearTopRow() {
     this.ctxTokens.clearRect(0, 0, 420, 60);
   }
 
-  renderPlayer(){
-
+  renderPlayer(player){
+    if (player == 0) {
+      this.color = "red";
+    }else{
+      this.color = "yellow"
+    }
+    return this.color;
   }
 }
 

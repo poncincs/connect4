@@ -52,13 +52,13 @@ class Model {
     this.matrix[columns][rows] = this.player;
   };
 
-  changePlayer() {
-    if (this.player == 0) {
+  changePlayer(player) {
+    if (player == 0) {
       this.player = 1;
-      this.renderPlayer(this.player);
+      this.renderPlayer(player);
     } else {
       this.player = 0;
-      this.renderPlayer(this.player);
+      this.renderPlayer(player);
     }
   }
 
