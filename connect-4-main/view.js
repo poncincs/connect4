@@ -4,7 +4,6 @@ class View {
         this.squareSize = 60;
         this.rows = 7;
         this.columns = 6;
-        this.color = "red";
         this.circleRayon = this.squareSize / 2;
         this.tokenSize = this.squareSize / 3;
         this.gameBoard = document.getElementById("gameBoard");
@@ -30,6 +29,12 @@ class View {
         this.addToken = callback;
     }
 
+    bindCheckWin(callback){
+        this.checkWin = callback;
+    }
+
+
+
     initView() {
         let div = document.querySelector(`#${this.div_id}`);
         this.p_tag = document.createElement('h1');
@@ -43,6 +48,14 @@ class View {
 
         let player1Selector = document.getElementById("player1");
         let player2Selector = document.getElementById("player2");
+        if(player2Selector.checked = "true"){
+            this.player = "yellow";
+        }
+
+        if(player1Selector.checked = "true"){
+            this.player = "red";
+        }
+
 
         player1Selector.addEventListener("change",() =>{
 
@@ -69,7 +82,6 @@ class View {
 
         this.tokens.height = this.squareSize * this.rows;
         this.tokens.width = this.squareSize * (this.columns + 1);
-//on veut pouvoir demander au model
 
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
@@ -117,6 +129,7 @@ class View {
     newMove(positionX){
         let column = this.addToken(positionX);
         this.drawToken(positionX, column+1, this.player);
+        this.checkWin();
         this.player = this.changePlayer();
         this.clearTopRow();
     }

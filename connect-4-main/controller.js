@@ -30,6 +30,9 @@ class Controller {
 
         this.bindChangePlayer = this.bindChangePlayer.bind(this);
         this.view.bindChangePlayer(this.bindChangePlayer);
+
+        this.bindCheckWin = this.bindCheckWin.bind(this);
+        this.view.bindCheckWin(this.bindCheckWin);
     }
 
     bindRender() {
@@ -54,5 +57,9 @@ class Controller {
 
     bindChangePlayer(){
         return this.model.changePlayer();
+    }
+
+    bindCheckWin(){
+        this.model.checkWin();
     }
 }
