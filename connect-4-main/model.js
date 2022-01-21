@@ -20,6 +20,8 @@ class Model {
         this.renderPlayer = callback;
     }
 
+
+
     initializeMatrix() {
         let matrix = [];
         let row = [];
@@ -69,7 +71,7 @@ class Model {
                 }
             }
         }
-        return 0;
+    return 0;
         //check diagonal bas gauche haut droit
         for (let x = 0; x < this.matrixW - 3; x++) {
             for (let y = 0; y < this.matrixH - 3; y++) {

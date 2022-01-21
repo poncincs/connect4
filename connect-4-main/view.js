@@ -29,6 +29,10 @@ class View {
         this.addToken = callback;
     }
 
+    bindCheckWin(callback){
+        this.checkWin = callback;
+    }
+
 
 
     initView() {
@@ -44,6 +48,14 @@ class View {
 
         let player1Selector = document.getElementById("player1");
         let player2Selector = document.getElementById("player2");
+        if(player2Selector.checked = "true"){
+            this.player = "yellow";
+        }
+
+        if(player1Selector.checked = "true"){
+            this.player = "red";
+        }
+
 
         player1Selector.addEventListener("change",() =>{
 
@@ -117,6 +129,7 @@ class View {
     newMove(positionX){
         let column = this.addToken(positionX);
         this.drawToken(positionX, column+1, this.player);
+        this.checkWin();
         this.player = this.changePlayer();
         this.clearTopRow();
     }
