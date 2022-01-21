@@ -6,8 +6,13 @@ class Model {
         this.matrix = this.initializeMatrix();
     }
 
+
     bindRender(callback) {
         this.render = callback;
+    }
+
+    bindChangePLayer(callback){
+        this.changePlayer = callback;
     }
 
     bindRenderPlayer(callback) {
@@ -32,10 +37,12 @@ class Model {
     };
 
     changePlayer() {
-        if (this.player === 0) {
-            this.player = 1;
+        if (this.player === 1) {
+            this.player = 2;
+            return "red";
         } else {
-            this.player = 0;
+            this.player = 1;
+            return "yellow";
         }
     }
 

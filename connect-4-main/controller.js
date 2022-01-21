@@ -12,8 +12,7 @@ class Controller {
          */
 
 
-        this.bindChangePlayer = this.bindChangePlayer.bind(this);
-        this.view.bindChangePlayer(this.bindChangePlayer);
+
 
 
         this.bindSetMatrix = this.bindSetMatrix.bind(this);
@@ -27,14 +26,9 @@ class Controller {
 
         this.bindAddToken = this.bindAddToken.bind(this);
         this.view.bindAddToken(this.bindAddToken);
-    }
 
-    bindDisplayCNF(cnf_value) {
-        this.view.displayCNF(cnf_value);
-    }
-
-    bindChangePlayer() {
-        this.model.changePlayer();
+        this.bindChangePlayer = this.bindChangePlayer.bind(this);
+        this.view.bindChangePlayer(this.bindChangePlayer);
     }
 
     bindSetMatrix() {
@@ -59,5 +53,9 @@ class Controller {
 
     bindAddToken(column) {
         return this.model.addToken(column);
+    }
+
+    bindChangePlayer(){
+        return this.model.changePlayer();
     }
 }

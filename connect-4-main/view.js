@@ -4,7 +4,7 @@ class View {
         this.squareSize = 60;
         this.rows = 7;
         this.columns = 6;
-        this.color = "red";
+        this.player = "red";
         this.circleRayon = this.squareSize / 2;
         this.tokenSize = this.squareSize / 3;
         this.gameBoard = document.getElementById("gameBoard");
@@ -17,7 +17,7 @@ class View {
 
     // Binding.
     bindChangePlayer(callback) {
-        this.changePlayer = callback; // On veut pouvoir demander au Model (depuis le Controller) une nouvelle Chuck Norris Fact.
+        this.changePlayer = callback;
     }
 
     bindSetMatrix(callback) {
@@ -31,7 +31,7 @@ class View {
     initView() {
         let div = document.querySelector(`#${this.div_id}`);
         this.p_tag = document.createElement('h1');
-        this.p_tag.innerHTML = 'PUISSANCE 4';
+        this.p_tag.innerHTML = 'CONNECT 4';
 
         let buttonReset = document.createElement('button');
         buttonReset.innerHTML = 'Recommencer';
@@ -44,7 +44,6 @@ class View {
 
         this.tokens.height = this.squareSize * this.rows;
         this.tokens.width = this.squareSize * (this.columns + 1);
-//on veut pouvoir demander au model
 
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
@@ -80,14 +79,14 @@ class View {
         this.gameBoard.addEventListener("mousemove", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.clearTopRow();
-            this.drawToken(position, 0, "red");
+            this.drawToken(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
 
             let y = this.addToken(position);
-            console.log(y);
-            this.drawToken(position, y+1, "red");
+            this.player = this.changePlayer()
+            this.drawToken(position, y+1, this.player);
         });
     }
 
