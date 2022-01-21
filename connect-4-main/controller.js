@@ -31,10 +31,6 @@ class Controller {
         this.view.bindChangePlayer(this.bindChangePlayer);
     }
 
-    bindSetMatrix() {
-        this.model.setmatrix();
-    }
-
     bindRender() {
         this.view.grid();
     }

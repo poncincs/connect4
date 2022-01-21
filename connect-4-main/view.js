@@ -4,7 +4,6 @@ class View {
         this.squareSize = 60;
         this.rows = 7;
         this.columns = 6;
-        this.player = "red";
         this.circleRayon = this.squareSize / 2;
         this.tokenSize = this.squareSize / 3;
         this.gameBoard = document.getElementById("gameBoard");
@@ -12,6 +11,8 @@ class View {
         this.ctxGameBoard = this.gameBoard.getContext("2d");
         this.ctxTokens = this.tokens.getContext("2d");
         this.initView();
+        this.player;
+
         this.addController();
     }
 
@@ -28,6 +29,8 @@ class View {
         this.addToken = callback;
     }
 
+
+
     initView() {
         let div = document.querySelector(`#${this.div_id}`);
         this.p_tag = document.createElement('h1');
@@ -38,6 +41,29 @@ class View {
         buttonReset.addEventListener('click', () => {
             location.reload();
         });
+
+        let player1Selector = document.getElementById("player1");
+        let player2Selector = document.getElementById("player2");
+
+        player1Selector.addEventListener("change",() =>{
+
+            if (confirm("Start with Red token?")) {
+                this.player = "red";
+            } else {
+                player2Selector.checked = "true";
+            }
+
+        });
+
+        player2Selector.addEventListener("change",() =>{
+            if (confirm("Start with Yellow token?")) {
+                this.player = "yellow";
+            } else {
+                player2Selector.checked = "true";
+            }
+
+        });
+
 
         this.gameBoard.height = this.squareSize * this.rows;
         this.gameBoard.width = this.squareSize * (this.columns + 1);
@@ -83,23 +109,23 @@ class View {
         });
         this.gameBoard.addEventListener("click", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
+            this.newMove((position));
 
-            let y = this.addToken(position);
-            this.player = this.changePlayer()
-            this.drawToken(position, y+1, this.player);
         });
+    }
+
+    newMove(positionX){
+        let column = this.addToken(positionX);
+        this.drawToken(positionX, column+1, this.player);
+        this.player = this.changePlayer();
+        this.clearTopRow();
     }
 
     clearTopRow() {
         this.ctxTokens.clearRect(0, 0, 420, 60);
     }
 
-    renderPlayer(player) {
-        if (player === 0) {
-            this.color = "red";
-        } else {
-            this.color = "yellow"
-        }
-        return this.color;
-    }
+
 }
+
+

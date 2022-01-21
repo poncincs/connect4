@@ -4,6 +4,7 @@ class Model {
         this.matrixW = 7;
         this.matrixH = 6;
         this.matrix = this.initializeMatrix();
+        this.changePlayer();
     }
 
 
@@ -37,7 +38,7 @@ class Model {
     };
 
     changePlayer() {
-        if (this.player === 1) {
+        if (this.player == 1) {
             this.player = 2;
             return "red";
         } else {
@@ -63,7 +64,7 @@ class Model {
         for (let y = 0; y < this.matrixW; y++) {
             for (let x = 0; x < this.matrixH - 3; x++) {
                 if (this.matrix[x][y] === this.player && this.matrix[x+1][y] === this.player && this.matrix[x+2][y] === this.player && this.matrix[x+3][y] === this.player) {
-                   console.log("victoire varticale");
+                   console.log("victoire verticale");
                     return 1;
                 }
             }
@@ -97,6 +98,7 @@ class Model {
                 this.setMatrix(column, i);
                 return i;
             } else if (i === 0) {
+                alert("You can't put this token");
                 return 567890;
             } else {
                 i--
