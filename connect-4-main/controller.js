@@ -27,18 +27,9 @@ class Controller {
 
         this.bindAddToken = this.bindAddToken.bind(this);
         this.view.bindAddToken(this.bindAddToken);
-    }
 
-    bindDisplayCNF(cnf_value) {
-        this.view.displayCNF(cnf_value);
-    }
-
-    bindChangePlayer() {
-        this.model.changePlayer();
-    }
-
-    bindSetMatrix() {
-        this.model.setmatrix();
+        this.bindChangePlayer = this.bindChangePlayer.bind(this);
+        this.view.bindChangePlayer(this.bindChangePlayer);
     }
 
     bindRender() {
@@ -53,11 +44,6 @@ class Controller {
         this.model.setMatrix();
     }
 
-<<<<<<< HEAD
-  bindAddToken(column) {
-    return this.model.addToken(column);
-  }
-=======
     bindRenderPlayer(player) {
         this.view.renderPlayer(player);
     }
@@ -65,5 +51,8 @@ class Controller {
     bindAddToken(column) {
         return this.model.addToken(column);
     }
->>>>>>> 412c279092cf3822dad975927e28a2acff8f7c57
+
+    bindChangePlayer(){
+        return this.model.changePlayer();
+    }
 }

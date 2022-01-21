@@ -148,7 +148,7 @@ function alertTie() {
 }
 
 function winDirections() {
-  for (y = 0; y < boardH; y++) { //horizontal
+  for (x = 0; y < boardH; y++) { //horizontal
     for (x = 0; x < boardW - 3; x++) {
       if (boardArray[y][x] == playerTurn && boardArray[y][x + 1] == playerTurn && boardArray[y][x + 2] == playerTurn && boardArray[y][x + 3] == playerTurn) return true;
     }

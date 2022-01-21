@@ -4,10 +4,16 @@ class Model {
         this.matrixW = 7;
         this.matrixH = 6;
         this.matrix = this.initializeMatrix();
+        this.changePlayer();
     }
+
 
     bindRender(callback) {
         this.render = callback;
+    }
+
+    bindChangePLayer(callback){
+        this.changePlayer = callback;
     }
 
     bindRenderPlayer(callback) {
@@ -32,32 +38,38 @@ class Model {
     };
 
     changePlayer() {
-        if (this.player === 0) {
-            this.player = 1;
+        if (this.player == 1) {
+            this.player = 2;
+            return "red";
         } else {
-            this.player = 0;
+            this.player = 1;
+            return "yellow";
         }
     }
 
     checkWin() {
         //check horizontal
-        for (let x = 0; x < this.matrixW - 3; x++) {
-            for (let y = 0; y < this.matrixH; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x + 1][y] === this.player && this.matrix[x + 2][y] === this.player && this.matrix[x + 3][y] === this.player) {
+        console.log(this.player);
+
+        for (let x = 0; x < this.matrixH ; x++) {
+            for (let y = 0; y < this.matrixW - 3; y++) {
+                if (this.matrix[x][y] === this.player && this.matrix[x][y+1] === this.player && this.matrix[x][y+2] === this.player && this.matrix[x][y+3] === this.player) {
+                    console.log("victoire horizontale");
                     return 1;
                 }
             }
         }
 
         //check vertical
-        for (let x = 0; x < this.matrixW; x++) {
-            for (let y = 0; y < this.matrixH - 3; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x][y + 1] === this.player && this.matrix[x][y + 2] === this.player && this.matrix[x][y + 3] === this.player) {
+        for (let y = 0; y < this.matrixW; y++) {
+            for (let x = 0; x < this.matrixH - 3; x++) {
+                if (this.matrix[x][y] === this.player && this.matrix[x+1][y] === this.player && this.matrix[x+2][y] === this.player && this.matrix[x+3][y] === this.player) {
+                   console.log("victoire verticale");
                     return 1;
                 }
             }
         }
-
+        return 0;
         //check diagonal bas gauche haut droit
         for (let x = 0; x < this.matrixW - 3; x++) {
             for (let y = 0; y < this.matrixH - 3; y++) {
@@ -86,7 +98,7 @@ class Model {
         //check diagonal
         for (let x = 3; x < this.matrixW; x++) {
             for (let y = 0; y < this.matrixH - 3; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x - 1][y + 1] === this.player && this.matrix[x - 2][y - 2] === this.player && this.matrix[x - 3][-3] === this.player) {
+                if (this.matrix[x][y] === this.player && this.matrix[x - 1][y + 1] === this.player && this.matrix[x - 2][y - 2] === this.player && this.matrix[x - 3][y - 3] === this.player) {
                     return 1;
                 }
             }
@@ -102,6 +114,7 @@ class Model {
                 this.setMatrix(column, i);
                 return i;
             } else if (i === 0) {
+                alert("You can't put this token");
                 return 567890;
             } else {
                 i--

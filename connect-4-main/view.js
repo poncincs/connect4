@@ -12,53 +12,14 @@ class View {
         this.ctxGameBoard = this.gameBoard.getContext("2d");
         this.ctxTokens = this.tokens.getContext("2d");
         this.initView();
+        this.player;
+
         this.addController();
     }
 
-<<<<<<< HEAD
-    div.appendChild(this.p_tag);
-    div.appendChild(this.gameBoard);
-    div.appendChild(this.tokens);
-    div.appendChild(buttonReset);
-  }
-
-  drawToken(x, y, color) {
-    let centerX = (x * this.squareSize) + (this.squareSize / 2);
-    let centerY = (y * this.squareSize) + (this.squareSize / 2);
-    let tileSize = (this.squareSize * 0.8) / 2;
-    this.ctxTokens.beginPath();
-    this.ctxTokens.fillStyle = color;
-    this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
-    this.ctxTokens.fill();
-  }
-
-  addController() {
-    this.gameBoard.addEventListener("mousemove", (e) => {
-      let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-      this.clearTopRow();
-      this.drawToken(position, 0, "red");
-    });
-    this.gameBoard.addEventListener("click", (e) => {
-      let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-      
-      this.addToken(position);
-      this.drawToken(position, 3 , "red");
-    });
-  }
-
-  clearTopRow() {
-    this.ctxTokens.clearRect(0, 0, 420, 60);
-  }
-
-  renderPlayer(player) {
-    if (player == 0) {
-      this.color = "red";
-    } else {
-      this.color = "yellow"
-=======
     // Binding.
     bindChangePlayer(callback) {
-        this.changePlayer = callback; // On veut pouvoir demander au Model (depuis le Controller) une nouvelle Chuck Norris Fact.
+        this.changePlayer = callback;
     }
 
     bindSetMatrix(callback) {
@@ -79,6 +40,29 @@ class View {
         buttonReset.addEventListener('click', () => {
             location.reload();
         });
+
+        let player1Selector = document.getElementById("player1");
+        let player2Selector = document.getElementById("player2");
+
+        player1Selector.addEventListener("change",() =>{
+
+            if (confirm("Start with Red token?")) {
+                this.player = "red";
+            } else {
+                player2Selector.checked = "true";
+            }
+
+        });
+
+        player2Selector.addEventListener("change",() =>{
+            if (confirm("Start with Yellow token?")) {
+                this.player = "yellow";
+            } else {
+                player2Selector.checked = "true";
+            }
+
+        });
+
 
         this.gameBoard.height = this.squareSize * this.rows;
         this.gameBoard.width = this.squareSize * (this.columns + 1);
@@ -121,28 +105,25 @@ class View {
         this.gameBoard.addEventListener("mousemove", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.clearTopRow();
-            this.drawToken(position, 0, "red");
+            this.drawToken(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
+            this.newMove((position));
 
-            let y = this.addToken(position);
-            console.log(y);
-            this.drawToken(position, y+1, "red");
         });
+    }
+
+    newMove(positionX){
+        let column = this.addToken(positionX);
+        this.drawToken(positionX, column+1, this.player);
+        this.player = this.changePlayer();
+        this.clearTopRow();
     }
 
     clearTopRow() {
         this.ctxTokens.clearRect(0, 0, 420, 60);
     }
 
-    renderPlayer(player) {
-        if (player === 0) {
-            this.color = "red";
-        } else {
-            this.color = "yellow"
-        }
-        return this.color;
->>>>>>> 412c279092cf3822dad975927e28a2acff8f7c57
-    }
+
 }
