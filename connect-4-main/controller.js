@@ -11,10 +11,6 @@ class Controller {
          Par conséquent, nous ne pourrions pas accéder à la View depuis le Model ou au Model depuis la View.
          */
 
-
-
-
-
         this.bindSetMatrix = this.bindSetMatrix.bind(this);
         this.view.bindSetMatrix(this.bindSetMatrix);
 
@@ -54,11 +50,11 @@ class Controller {
         return this.model.addToken(column);
     }
 
-    bindChangePlayer(){
+    bindChangePlayer() {
         return this.model.changePlayer();
     }
 
-    bindCheckWin(){
-        this.model.checkWin();
+    bindCheckWin() {
+        return this.model.checkWin();
     }
 }

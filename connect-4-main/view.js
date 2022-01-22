@@ -29,10 +29,9 @@ class View {
         this.addToken = callback;
     }
 
-    bindCheckWin(callback){
+    bindCheckWin(callback) {
         this.checkWin = callback;
     }
-
 
 
     initView() {
@@ -48,16 +47,17 @@ class View {
 
         let player1Selector = document.getElementById("player1");
         let player2Selector = document.getElementById("player2");
-        if(player2Selector.checked = "true"){
+
+        if (player2Selector.checked = "true") {
             this.player = "yellow";
         }
 
-        if(player1Selector.checked = "true"){
+        if (player1Selector.checked = "true") {
             this.player = "red";
         }
 
 
-        player1Selector.addEventListener("change",() =>{
+        player1Selector.addEventListener("change", () => {
 
             if (confirm("Start with Red token?")) {
                 this.player = "red";
@@ -67,7 +67,7 @@ class View {
 
         });
 
-        player2Selector.addEventListener("change",() =>{
+        player2Selector.addEventListener("change", () => {
             if (confirm("Start with Yellow token?")) {
                 this.player = "yellow";
             } else {
@@ -126,10 +126,15 @@ class View {
         });
     }
 
-    newMove(positionX){
+    newMove(positionX) {
         let column = this.addToken(positionX);
-        this.drawToken(positionX, column+1, this.player);
-        this.checkWin();
+        this.drawToken(positionX, column + 1, this.player);
+        let winnerMatrix = this.checkWin();
+        if (winnerMatrix != 0) {
+            this.drawWinner(winnerMatrix);
+            this.p_tag.innerHTML = 'VICTOIRE';
+
+        }
         this.player = this.changePlayer();
         this.clearTopRow();
     }
@@ -138,7 +143,11 @@ class View {
         this.ctxTokens.clearRect(0, 0, 420, 60);
     }
 
-
+    drawWinner(matrixCoord) {
+        for (let i = 0; i < 4; i++) {
+            this.drawToken(matrixCoord[i][1], matrixCoord[i][0] + 1, "green");
+        }
+    }
 }
 
 

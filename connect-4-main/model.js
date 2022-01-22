@@ -12,14 +12,13 @@ class Model {
         this.render = callback;
     }
 
-    bindChangePLayer(callback){
+    bindChangePLayer(callback) {
         this.changePlayer = callback;
     }
 
     bindRenderPlayer(callback) {
         this.renderPlayer = callback;
     }
-
 
 
     initializeMatrix() {
@@ -51,50 +50,103 @@ class Model {
 
     checkWin() {
         //check horizontal
-        console.log(this.player);
-
-        for (let x = 0; x < this.matrixH ; x++) {
+        for (let x = 0; x < this.matrixH; x++) {
             for (let y = 0; y < this.matrixW - 3; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x][y+1] === this.player && this.matrix[x][y+2] === this.player && this.matrix[x][y+3] === this.player) {
-                    console.log("victoire horizontale");
-                    return 1;
+                if (this.matrix[x][y] === this.player && this.matrix[x][y + 1] === this.player && this.matrix[x][y + 2] === this.player && this.matrix[x][y + 3] === this.player) {
+
+                    let winPositon = this.createWinnerMatrix();
+
+                    winPositon[0][0] = x;
+                    winPositon[0][1] = y;
+
+                    winPositon[1][0] = x;
+                    winPositon[1][1] = y + 1;
+
+                    winPositon[2][0] = x;
+                    winPositon[2][1] = y + 2;
+
+                    winPositon[3][0] = x;
+                    winPositon[3][1] = y + 3;
+
+                    return winPositon;
                 }
             }
         }
-
         //check vertical
         for (let y = 0; y < this.matrixW; y++) {
             for (let x = 0; x < this.matrixH - 3; x++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x+1][y] === this.player && this.matrix[x+2][y] === this.player && this.matrix[x+3][y] === this.player) {
-                   console.log("victoire verticale");
-                    return 1;
-                }
-            }
-        }
-    return 0;
-        //check diagonal bas gauche haut droit
-        for (let x = 0; x < this.matrixW - 3; x++) {
-            for (let y = 0; y < this.matrixH - 3; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x + 1][y + 1] === this.player && this.matrix[x + 2][y + 2] === this.player && this.matrix[x + 3][y + 3] === this.player) {
-                    return 1;
-                }
-            }
-        }
+                if (this.matrix[x][y] === this.player && this.matrix[x + 1][y] === this.player && this.matrix[x + 2][y] === this.player && this.matrix[x + 3][y] === this.player) {
+                    let winPositon = this.createWinnerMatrix();
 
-        //check diagonal
-        for (let x = 3; x < this.matrixW; x++) {
-            for (let y = 0; y < this.matrixH - 3; y++) {
-                if (this.matrix[x][y] === this.player && this.matrix[x - 1][y + 1] === this.player && this.matrix[x - 2][y - 2] === this.player && this.matrix[x - 3][y - 3] === this.player) {
-                    return 1;
+                    winPositon[0][0] = x;
+                    winPositon[0][1] = y;
+
+                    winPositon[1][0] = x + 1;
+                    winPositon[1][1] = y;
+
+                    winPositon[2][0] = x + 2;
+                    winPositon[2][1] = y;
+
+                    winPositon[3][0] = x + 3;
+                    winPositon[3][1] = y;
+
+                    return winPositon;
                 }
             }
         }
+        //check diagonal bas gauche haut droit
+        for (let x = 0; x < this.matrixH - 3; x++) {
+            for (let y = 0; y < this.matrixW - 3; y++) {
+                if (this.matrix[x][y] === this.player && this.matrix[x + 1][y + 1] === this.player && this.matrix[x + 2][y + 2] === this.player && this.matrix[x + 3][y + 3] === this.player) {
+
+                    let winPositon = this.createWinnerMatrix();
+
+                    winPositon[0][0] = x;
+                    winPositon[0][1] = y;
+
+                    winPositon[1][0] = x + 1;
+                    winPositon[1][1] = y + 1;
+
+                    winPositon[2][0] = x + 2;
+                    winPositon[2][1] = y + 2;
+
+                    winPositon[3][0] = x + 3;
+                    winPositon[3][1] = y + 3;
+
+                    return winPositon;
+                }
+            }
+        }
+        //check diagonal
+        for (let x = 0; x < this.matrixH - 3; x++) {
+            for (let y = this.matrixW; y > 3; y--) {
+                if (this.matrix[x][y] === this.player && this.matrix[x + 1][y - 1] === this.player && this.matrix[x + 2][y - 2] === this.player && this.matrix[x + 3][y - 3] === this.player) {
+
+                    let winPositon = this.createWinnerMatrix();
+
+                    winPositon[0][0] = x;
+                    winPositon[0][1] = y;
+
+                    winPositon[1][0] = x + 1;
+                    winPositon[1][1] = y - 1;
+
+                    winPositon[2][0] = x + 2;
+                    winPositon[2][1] = y - 2;
+
+                    winPositon[3][0] = x + 3;
+                    winPositon[3][1] = y - 3;
+
+
+                    return winPositon;
+                }
+            }
+        }
+        return 0;
     }
 
     addToken(column) {
         let i = 5;
 
-        console.log(this.matrix);
         do {
             if (this.matrix[i][column] === 0) {
                 this.setMatrix(column, i);
@@ -107,5 +159,18 @@ class Model {
             }
         } while (1);
 
+    }
+
+    createWinnerMatrix() {
+        let matrix = [];
+        let row = [];
+        for (let i = 0; i < 4; i++) {
+            row = [];
+            for (let j = 0; j < 2; j++) {
+                row.push(0);
+            }
+            matrix.push(row);
+        }
+        return matrix;
     }
 }
