@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" xmlns="">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>CONNECT 4</title>
+    <title>PUISSANCE 4</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
@@ -14,10 +14,10 @@
 <nav class="Menu">
     <form method="post">
         <input type="checkbox" id="activateAI" name="activateAI" value="activateAI">
-        <label for="activateAI">Activer l'IA</label>
+        <label for="activateAI">Active AI</label>
     </form>
     <form method="post">
-        <legend>Starting Player</legend>
+        <span>Starting Player</span>
         <div>
             <input type="radio" id="player1" value="player1" name="joueur" checked>
             <label for="player1">Red</label>
@@ -32,6 +32,23 @@
     <div id="mvc">
         <canvas id="tokens"></canvas>
         <canvas id="gameBoard"></canvas>
+    </div>
+    <!-- The Modal -->
+    <div id="victory" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>WIN !!</h2>
+            </div>
+            <div id="modal-body" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <p></p>
+            </div>
+        </div>
+
     </div>
 </section>
 <script src="controller.js" charset="utf-8"></script>

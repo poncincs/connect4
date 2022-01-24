@@ -37,7 +37,7 @@ class View {
     initView() {
         let div = document.querySelector(`#${this.div_id}`);
         this.p_tag = document.createElement('h1');
-        this.p_tag.innerHTML = 'PUISSANCE 4';
+        this.p_tag.innerHTML = 'CONNECT 4';
 
         let buttonReset = document.createElement('button');
         buttonReset.innerHTML = 'Recommencer';
@@ -56,11 +56,10 @@ class View {
             this.player = "red";
         }
 
-
         player1Selector.addEventListener("change", () => {
-
-            if (confirm("Start with Red token?")) {
-                this.player = "red";
+            if (confirm("Start with Red token ?")) {
+                this.player = this.changePlayer();
+                location.reload();
             } else {
                 player2Selector.checked = "true";
             }
@@ -68,14 +67,13 @@ class View {
         });
 
         player2Selector.addEventListener("change", () => {
-            if (confirm("Start with Yellow token?")) {
-                this.player = "yellow";
+            if (confirm("Start with Yellow token ?")) {
+                this.player = this.changePlayer();
+                location.reload();
             } else {
-                player2Selector.checked = "true";
+                player1Selector.checked = "true";
             }
-
         });
-
 
         this.gameBoard.height = this.squareSize * this.rows;
         this.gameBoard.width = this.squareSize * (this.columns + 1);
@@ -120,9 +118,9 @@ class View {
             this.drawToken(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
+            this.gameBoard.style.pointerEvents = "none";
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-            this.newMove((position));
-
+            this.newMove(position);
         });
     }
 
@@ -132,11 +130,28 @@ class View {
         let winnerMatrix = this.checkWin();
         if (winnerMatrix != 0) {
             this.drawWinner(winnerMatrix);
-            this.p_tag.innerHTML = 'VICTOIRE';
-
+            this.p_tag.innerHTML = 'VICTORY !!';
+            var victoire = document.getElementById("victory");
+            var close = document.getElementsByClassName("close")[0];
+            var modalBody = document.getElementById("modal-body")
+            var playerWin = document.createElement('h3');
+            playerWin.setAttribute("id", "winner");
+            playerWin.innerHTML = `Player ${this.player} win !`;
+            modalBody.appendChild(playerWin);
+            victoire.style.display = "block";
+            close.onclick = function() {
+                victoire.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == victoire) {
+                    victoire.style.display = "none";
+                }
+            }
+            return;
         }
         this.player = this.changePlayer();
         this.clearTopRow();
+        this.gameBoard.style.pointerEvents = "auto";
     }
 
     clearTopRow() {
@@ -145,7 +160,7 @@ class View {
 
     drawWinner(matrixCoord) {
         for (let i = 0; i < 4; i++) {
-            this.drawToken(matrixCoord[i][1], matrixCoord[i][0] + 1, "green");
+            this.drawToken(matrixCoord[i][1], matrixCoord[i][0] + 1, "#00FF00");
         }
     }
 }

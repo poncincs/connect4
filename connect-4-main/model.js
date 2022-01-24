@@ -39,7 +39,7 @@ class Model {
     };
 
     changePlayer() {
-        if (this.player == 1) {
+        if (this.player === 1) {
             this.player = 2;
             return "red";
         } else {
@@ -152,7 +152,7 @@ class Model {
                 this.setMatrix(column, i);
                 return i;
             } else if (i === 0) {
-                alert("You can't put this token");
+                alert("You can't put this token, the column is already full !");
                 return 567890;
             } else {
                 i--
