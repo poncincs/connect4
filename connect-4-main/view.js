@@ -105,7 +105,7 @@ class View {
         this.gameBoard.addEventListener("mousemove", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.clearTopRow(0);
-            this.drawTokenTop(position, 0, this.player);
+            this.drawToken(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
             this.gameBoard.style.pointerEvents = "none";
@@ -121,7 +121,7 @@ class View {
 
     newMove(positionX) {
         let column = this.addToken(positionX);
-        this.drawToken2(positionX, column + 1, this.player,0, 1);
+        this.drawToken2(positionX, column + 1, this.player);
         let winnerMatrix = this.checkWin();
         if (winnerMatrix != 0) {
             this.drawWinner(winnerMatrix);
@@ -158,7 +158,7 @@ class View {
     }
 
 
-   drawTokenTop(x, y, color) {
+   drawToken(x, y, color) {
         let centerX = (x * this.squareSize) + (this.squareSize / 2);
         let centerY = (y * this.squareSize) + (this.squareSize / 2);
         let tileSize = (this.squareSize * 0.8) / 2;
@@ -169,32 +169,15 @@ class View {
     }
 
 
-    drawToken2(x, y, color, sens, firstCall) {
+    drawToken2(x, y, color, sens) {
         let centerX = (x * this.squareSize) + (this.squareSize / 2);
-
-        if (sens ==0  && firstCall == 1){
-
-            var yPos = 0;
-            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
-
-        }else if (sens == 0 && firstCall !=1){
-
-            var yPos = (y * this.squareSize) + (this.squareSize / 2) - 30;
-            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
-
-        } else{
-            var yPos = (y * this.squareSize) + (this.squareSize / 2) - 30;
-            var yfinal = ((y * this.squareSize) + (this.squareSize / 2) - 30)*0.8;
-
-        }
-
-
+        let yPos = 0;
+        let yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
 
         let tileSize = (this.squareSize * 0.8) / 2;
 
-        let b = setInterval(() => {draw()},1);
 
-
+        let b = setInterval(() => {draw()},8);
 
         let draw = () => {
             console.log("cc");
@@ -206,37 +189,11 @@ class View {
             this.ctxTokens.fillStyle = color;
             this.ctxTokens.fill();
 
-            if (yPos === yfinal){
+            if (yPos == yfinal){
                 clearInterval(b);
-                yfinal *= 0.2;
-                console.log(yfinal,yPos);
-                console.log(sens);
-
-                if (sens == 0){
-                    sens = 1;
-                } else if (sens === 1){
-                    sens = 0;
-                }
-
-                this.drawToken2(x,y,color,sens, 0);
             }
 
-            if (sens === 0){
-                console.log(y);
-
-                yPos+=6;
-
-                console.log(y);
-                console.log(yPos,yfinal);
-
-                debugger;
-            }else {
-                yPos--;
-                console.log(y);
-                console.log(yPos,yfinal);
-                debugger
-            }
-
+            yPos+=6;
 
         }
 
