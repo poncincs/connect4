@@ -84,6 +84,7 @@ class View {
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
 
+
         this.ctxGameBoard.globalCompositeOperation = 'destination-out';
         for (let i = 0; i < this.rows; i++) {
             for (let y = 0; y < this.columns; y++) {
@@ -100,6 +101,15 @@ class View {
         div.appendChild(buttonReset);
     }
 
+    drawToken(x, y, color) {
+        let centerX = (x * this.squareSize) + (this.squareSize / 2);
+        let centerY = (y * this.squareSize) + (this.squareSize / 2);
+        let tileSize = (this.squareSize * 0.8) / 2;
+        this.ctxTokens.beginPath();
+        this.ctxTokens.fillStyle = color;
+        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
+        this.ctxTokens.fill();
+    }
 
     addController() {
         this.gameBoard.addEventListener("mousemove", (e) => {
