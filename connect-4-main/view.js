@@ -70,6 +70,8 @@ class View {
             if (confirm("Start with Yellow token ?")) {
                 this.player = this.changePlayer();
                 location.reload();
+                player1Selector.removeAttribute("checked","");
+                player2Selector.setAttribute("checked", "");
             } else {
                 player1Selector.checked = "true";
             }
@@ -107,7 +109,7 @@ class View {
         let tileSize = (this.squareSize * 0.8) / 2;
         this.ctxTokens.beginPath();
         this.ctxTokens.fillStyle = color;
-        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
+        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 2)
         this.ctxTokens.fill();
     }
 
@@ -140,6 +142,15 @@ class View {
             var close = document.getElementsByClassName("close")[0];
             var modalBody = document.getElementById("modal-body")
             var playerWin = document.createElement('h3');
+            let colorModal = document.styleSheets[0];
+
+            if (this.player === "yellow") {
+                colorModal.cssRules[0].style.backgroundColor = "#FFB000";
+                colorModal.cssRules[1].style.backgroundColor = "#FFB000";
+            }else if (this.player === "red") {
+                colorModal.cssRules[0].style.backgroundColor = "#AE0000";
+                colorModal.cssRules[1].style.backgroundColor = "#AE0000";
+            }
             playerWin.setAttribute("id", "winner");
             playerWin.innerHTML = `Player ${this.player} win !`;
             modalBody.appendChild(playerWin);
