@@ -84,7 +84,6 @@ class View {
         this.ctxGameBoard.fillStyle = "blue";
         this.ctxGameBoard.fillRect(0, this.squareSize, this.gameBoard.width * this.squareSize, this.gameBoard.height - this.squareSize);
 
-
         this.ctxGameBoard.globalCompositeOperation = 'destination-out';
         for (let i = 0; i < this.rows; i++) {
             for (let y = 0; y < this.columns; y++) {
@@ -101,21 +100,12 @@ class View {
         div.appendChild(buttonReset);
     }
 
-    drawToken(x, y, color) {
-        let centerX = (x * this.squareSize) + (this.squareSize / 2);
-        let centerY = (y * this.squareSize) + (this.squareSize / 2);
-        let tileSize = (this.squareSize * 0.8) / 2;
-        this.ctxTokens.beginPath();
-        this.ctxTokens.fillStyle = color;
-        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 25)
-        this.ctxTokens.fill();
-    }
 
     addController() {
         this.gameBoard.addEventListener("mousemove", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
-            this.clearTopRow();
-            this.drawToken(position, 0, this.player);
+            this.clearTopRow(0);
+            this.drawTokenTop(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
             this.gameBoard.style.pointerEvents = "none";
@@ -124,9 +114,14 @@ class View {
         });
     }
 
+    clearTopRow(y) {
+        this.ctxTokens.clearRect(0, y, 420, 60);
+    }
+
+
     newMove(positionX) {
         let column = this.addToken(positionX);
-        this.drawToken(positionX, column + 1, this.player);
+        this.drawToken2(positionX, column + 1, this.player,0, 1);
         let winnerMatrix = this.checkWin();
         if (winnerMatrix != 0) {
             this.drawWinner(winnerMatrix);
@@ -154,13 +149,102 @@ class View {
         this.gameBoard.style.pointerEvents = "auto";
     }
 
-    clearTopRow() {
-        this.ctxTokens.clearRect(0, 0, 420, 60);
-    }
+
 
     drawWinner(matrixCoord) {
         for (let i = 0; i < 4; i++) {
             this.drawToken(matrixCoord[i][1], matrixCoord[i][0] + 1, "#00FF00");
         }
     }
+
+
+   drawTokenTop(x, y, color) {
+        let centerX = (x * this.squareSize) + (this.squareSize / 2);
+        let centerY = (y * this.squareSize) + (this.squareSize / 2);
+        let tileSize = (this.squareSize * 0.8) / 2;
+        this.ctxTokens.beginPath();
+        this.ctxTokens.fillStyle = color;
+        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 2)
+        this.ctxTokens.fill();
+    }
+
+
+    drawToken2(x, y, color, sens, firstCall) {
+        let centerX = (x * this.squareSize) + (this.squareSize / 2);
+
+        if (sens ==0  && firstCall == 1){
+
+            var yPos = 0;
+            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+        }else if (sens == 0 && firstCall !=1){
+
+            var yPos = (y * this.squareSize) + (this.squareSize / 2) - 30;
+            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+        } else{
+            var yPos = (y * this.squareSize) + (this.squareSize / 2) - 30;
+            var yfinal = ((y * this.squareSize) + (this.squareSize / 2) - 30)*0.8;
+
+        }
+
+
+
+        let tileSize = (this.squareSize * 0.8) / 2;
+
+        let b = setInterval(() => {draw()},1);
+
+
+
+        let draw = () => {
+            console.log("cc");
+            this.clearToken(x * 60, yPos-1);
+
+
+            this.ctxTokens.beginPath();
+            this.ctxTokens.arc(centerX, yPos + 30, tileSize, 0, Math.PI * 2);
+            this.ctxTokens.fillStyle = color;
+            this.ctxTokens.fill();
+
+            if (yPos === yfinal){
+                clearInterval(b);
+                yfinal *= 0.2;
+                console.log(yfinal,yPos);
+                console.log(sens);
+
+                if (sens == 0){
+                    sens = 1;
+                } else if (sens === 1){
+                    sens = 0;
+                }
+
+                this.drawToken2(x,y,color,sens, 0);
+            }
+
+            if (sens === 0){
+                console.log(y);
+
+                yPos+=6;
+
+                console.log(y);
+                console.log(yPos,yfinal);
+
+                debugger;
+            }else {
+                yPos--;
+                console.log(y);
+                console.log(yPos,yfinal);
+                debugger
+            }
+
+
+        }
+
+    }
+
+    clearToken(x, y) {
+        this.ctxTokens.clearRect(x, y, 60, 60);
+    }
 }
+
+
