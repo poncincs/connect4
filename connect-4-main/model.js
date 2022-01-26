@@ -173,4 +173,64 @@ class Model {
         }
         return matrix;
     }
+
+    /*minimax(position, depth, alpha, beta, maximizingPlayer) {
+        if (depth === 0 || (checkWin() === 1)){
+            return this.evaluation(position);
+        }
+        if (maximizingPlayer) {
+            maxEval = -10000;
+            for (child in position) {
+                evalNode = this.minimax(child, depth-1, alpha, beta, false);
+                maxEval = max(maxEval, evalNode);
+                alpha = max(alpha, evalNode);
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+            return maxEval;
+        } else {
+            minEval = +10000;
+            for (child in position) {
+                evalNode = this.minimax(child, depth-1, alpha, beta, true);
+                minEval = min(minEval, evalNode);
+                beta = min(beta, evalNode);
+                if (beta <= alpha) {
+                    break;
+                }
+            }
+            return minEval;
+        }
+    }*/
+
+    evaluation(position) {
+        for (let i = 0; i < this.matrixH; i++ ){
+            let check = position[i].join("");
+        }
+        //Horizontal
+
+        if (check & (check >> 14)) {
+            return true;
+        }
+
+        //Diagonal
+        check = position & (position >> 6);
+        if (check & (check >> 12)) {
+            return true;
+        }
+
+        //Diagonal
+        check = position & (position >> 8);
+        if (check & (check >> 16)) {
+            return true;
+        }
+
+        //Vertical
+        check = position & (position >> 1);
+        if (check & (check >> 2)) {
+            return true;
+        }
+
+        return false;
+    }
 }
