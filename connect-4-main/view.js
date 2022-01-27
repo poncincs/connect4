@@ -70,8 +70,6 @@ class View {
             if (confirm("Start with Yellow token ?")) {
                 this.player = this.changePlayer();
                 location.reload();
-                player1Selector.removeAttribute("checked","");
-                player2Selector.setAttribute("checked", "");
             } else {
                 player1Selector.checked = "true";
             }
@@ -103,21 +101,12 @@ class View {
         div.appendChild(buttonReset);
     }
 
-    drawToken(x, y, color) {
-        let centerX = (x * this.squareSize) + (this.squareSize / 2);
-        let centerY = (y * this.squareSize) + (this.squareSize / 2);
-        let tileSize = (this.squareSize * 0.8) / 2;
-        this.ctxTokens.beginPath();
-        this.ctxTokens.fillStyle = color;
-        this.ctxTokens.arc(centerX, centerY, tileSize, 0, Math.PI * 2)
-        this.ctxTokens.fill();
-    }
 
     addController() {
         this.gameBoard.addEventListener("mousemove", (e) => {
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.clearTopRow(0);
-            this.drawToken(position, 0, this.player);
+            this.drawTokenTop(position, 0, this.player);
         });
         this.gameBoard.addEventListener("click", (e) => {
             this.gameBoard.style.pointerEvents = "none";
@@ -133,7 +122,7 @@ class View {
 
     newMove(positionX) {
         let column = this.addToken(positionX);
-        this.drawToken2(positionX, column + 1, this.player);
+        this.drawToken2(positionX, column + 1, this.player,0, 1);
         let winnerMatrix = this.checkWin();
         if (winnerMatrix != 0) {
             this.drawWinner(winnerMatrix);
@@ -142,15 +131,6 @@ class View {
             var close = document.getElementsByClassName("close")[0];
             var modalBody = document.getElementById("modal-body")
             var playerWin = document.createElement('h3');
-            let colorModal = document.styleSheets[0];
-
-            if (this.player === "yellow") {
-                colorModal.cssRules[0].style.backgroundColor = "#FFB000";
-                colorModal.cssRules[1].style.backgroundColor = "#FFB000";
-            }else if (this.player === "red") {
-                colorModal.cssRules[0].style.backgroundColor = "#AE0000";
-                colorModal.cssRules[1].style.backgroundColor = "#AE0000";
-            }
             playerWin.setAttribute("id", "winner");
             playerWin.innerHTML = `Player ${this.player} win !`;
             modalBody.appendChild(playerWin);
@@ -179,7 +159,7 @@ class View {
     }
 
 
-   drawToken(x, y, color) {
+    drawTokenTop(x, y, color) {
         let centerX = (x * this.squareSize) + (this.squareSize / 2);
         let centerY = (y * this.squareSize) + (this.squareSize / 2);
         let tileSize = (this.squareSize * 0.8) / 2;
@@ -190,15 +170,38 @@ class View {
     }
 
 
-    drawToken2(x, y, color, sens) {
+    drawToken2(x, y, color, sens, firstCall) {
         let centerX = (x * this.squareSize) + (this.squareSize / 2);
-        let yPos = 0;
-        let yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+        if (sens ==0  && firstCall == 1){
+
+            var yPos = 0;
+            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+        }else if (sens == 0 && firstCall !=1){
+
+            var yPos = firstCall;
+            var yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+        } else{
+            var yPos = (y * this.squareSize) + (this.squareSize / 2) - 30;
+
+            if (firstCall != 1){
+                var yfinal = firstCall*0.8;
+            }else{
+                var yfinal = ((y * this.squareSize) + (this.squareSize / 2) - 30)*0.8;
+            }
+
+
+        }
+
+
 
         let tileSize = (this.squareSize * 0.8) / 2;
 
+        let b = setInterval(() => {draw()},1);
 
-        let b = setInterval(() => {draw()},8);
+
 
         let draw = () => {
             console.log("cc");
@@ -210,11 +213,37 @@ class View {
             this.ctxTokens.fillStyle = color;
             this.ctxTokens.fill();
 
-            if (yPos == yfinal){
+            if (yPos === yfinal){
                 clearInterval(b);
+                yfinal *= 0.2;
+                console.log(sens);
+
+                if (sens == 0){
+                    sens = 1;
+                } else if (sens === 1){
+                    sens = 0;
+                }
+                console.log(sens);
+                debugger;
+                this.drawToken2(x,y,color,sens, yPos);
             }
 
-            yPos+=6;
+            if (sens === 0){
+                console.log(y);
+
+                yPos++;
+
+                console.log(y);
+                console.log(yPos,yfinal);
+
+
+            }else {
+                yPos--;
+                console.log(y);
+                console.log(yPos,yfinal);
+
+            }
+
 
         }
 

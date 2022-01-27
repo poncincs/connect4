@@ -118,7 +118,7 @@ section {
 #gameBoard {
     position: absolute;
     margin: 10px;
-    border-radius: 12px;
+
     display: block;
     background: transparent;
     z-index: 1;
