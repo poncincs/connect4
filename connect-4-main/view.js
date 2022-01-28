@@ -33,9 +33,9 @@ class View {
         this.checkWin = callback;
     }
 
-    // bindEval(callback) {
-    //     this.evaluation = callback;
-    // }
+    bindEval(callback) {
+        this.evaluation = callback;
+    }
 
     bindMatrix(callback) {
         this.matrix = callback;
@@ -126,7 +126,7 @@ class View {
             this.gameBoard.style.pointerEvents = "none";
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.newMove(position);
-            // console.log(this.evaluation(this.matrix()));
+
         });
     }
 
