@@ -11,6 +11,9 @@ class Controller {
          Par conséquent, nous ne pourrions pas accéder à la View depuis le Model ou au Model depuis la View.
          */
 
+        // this.bindEval = this.bindEval.bind(this);
+        // this.view.bindEval(this.bindEval);
+
         this.bindSetMatrix = this.bindSetMatrix.bind(this);
         this.view.bindSetMatrix(this.bindSetMatrix);
 
@@ -28,6 +31,9 @@ class Controller {
 
         this.bindCheckWin = this.bindCheckWin.bind(this);
         this.view.bindCheckWin(this.bindCheckWin);
+
+        this.bindMatrix = this.bindMatrix.bind(this);
+        this.view.bindMatrix(this.bindMatrix);
     }
 
     bindRender() {
@@ -56,5 +62,13 @@ class Controller {
 
     bindCheckWin() {
         return this.model.checkWin();
+    }
+
+    // bindEval(position) {
+    //     return this.model.evaluation(position);
+    // }
+
+    bindMatrix() {
+        return this.model.matrix;
     }
 }

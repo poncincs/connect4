@@ -7,7 +7,6 @@ class Model {
         this.changePlayer();
     }
 
-
     bindRender(callback) {
         this.render = callback;
     }
@@ -19,7 +18,6 @@ class Model {
     bindRenderPlayer(callback) {
         this.renderPlayer = callback;
     }
-
 
     initializeMatrix() {
         let matrix = [];
@@ -203,34 +201,48 @@ class Model {
         }
     }*/
 
-    evaluation(position) {
-        for (let i = 0; i < this.matrixH; i++ ){
-            let check = position[i].join("");
-        }
-        //Horizontal
-
-        if (check & (check >> 14)) {
-            return true;
-        }
-
-        //Diagonal
-        check = position & (position >> 6);
-        if (check & (check >> 12)) {
-            return true;
-        }
-
-        //Diagonal
-        check = position & (position >> 8);
-        if (check & (check >> 16)) {
-            return true;
-        }
-
-        //Vertical
-        check = position & (position >> 1);
-        if (check & (check >> 2)) {
-            return true;
-        }
-
-        return false;
-    }
+    // evaluation(position) {
+    //     var score_rouge = 0;
+    //     var score_jaune = 0;
+    //     var ligne;
+    //     var test;
+    //     var count = 0;
+    //     // Ligne
+    //     for (var x = 0; x < this.matrixH; x++) {
+    //         ligne = position[x];
+    //         // calcul score jaune
+    //         for (var i = 0; i < ligne.length; i++) {
+    //             debugger;
+    //             if (ligne) {
+    //                 score_jaune += 10;
+    //                 break;
+    //             } else if (test.indexOf("111") !== -1) {
+    //                 score_jaune += 100;
+    //                 break;
+    //             } else if (test.indexOf("1") !== -1) {
+    //                 score_jaune += 5;
+    //             }
+    //
+    //         }
+    //     }
+    //     return score_jaune;
+    //
+    //     // Diagonal haut gauche - bas droite
+    //     for (let x = 0; x < this.matrixH - 3; x++) {
+    //         for (let y = this.matrixW; y > 3; y--) {
+    //         }
+    //     }
+    //
+    //     //Diagonal bas gauche - haut droite
+    //     for (let x = 0; x < this.matrixH - 3; x++) {
+    //         for (let y = 0; y < this.matrixW - 3; y++) {
+    //         }
+    //     }
+    //
+    //     //Colonne
+    //     for (let y = 0; y < this.matrixW; y++) {
+    //         for (let x = 0; x < this.matrixH - 3; x++) {
+    //         }
+    //     }
+    // }
 }

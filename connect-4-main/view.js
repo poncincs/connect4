@@ -33,6 +33,13 @@ class View {
         this.checkWin = callback;
     }
 
+    // bindEval(callback) {
+    //     this.evaluation = callback;
+    // }
+
+    bindMatrix(callback) {
+        this.matrix = callback;
+    }
 
     initView() {
         let div = document.querySelector(`#${this.div_id}`);
@@ -59,7 +66,6 @@ class View {
         player1Selector.addEventListener("change", () => {
             if (confirm("Start with Red token ?")) {
                 this.player = this.changePlayer();
-                location.reload();
             } else {
                 player2Selector.checked = "true";
             }
@@ -69,9 +75,6 @@ class View {
         player2Selector.addEventListener("change", () => {
             if (confirm("Start with Yellow token ?")) {
                 this.player = this.changePlayer();
-                location.reload();
-                player1Selector.removeAttribute("checked","");
-                player2Selector.setAttribute("checked", "");
             } else {
                 player1Selector.checked = "true";
             }
@@ -123,6 +126,7 @@ class View {
             this.gameBoard.style.pointerEvents = "none";
             let position = Math.floor((e.clientX - this.gameBoard.offsetLeft) / this.squareSize);
             this.newMove(position);
+            // console.log(this.evaluation(this.matrix()));
         });
     }
 
@@ -131,16 +135,17 @@ class View {
     }
 
 
-    newMove(positionX) {
+    async newMove(positionX) {
         let column = this.addToken(positionX);
-        this.drawToken2(positionX, column + 1, this.player);
+        await this.drawToken2(positionX, column + 1, this.player);
         let winnerMatrix = this.checkWin();
         if (winnerMatrix != 0) {
             this.drawWinner(winnerMatrix);
+            console.log("après drawWinner");
             this.p_tag.innerHTML = 'VICTORY !!';
             var victoire = document.getElementById("victory");
             var close = document.getElementsByClassName("close")[0];
-            var modalBody = document.getElementById("modal-body")
+            var modalBody = document.getElementById("modal-body");
             var playerWin = document.createElement('h3');
             let colorModal = document.styleSheets[0];
 
@@ -170,14 +175,11 @@ class View {
         this.gameBoard.style.pointerEvents = "auto";
     }
 
-
-
     drawWinner(matrixCoord) {
         for (let i = 0; i < 4; i++) {
             this.drawToken(matrixCoord[i][1], matrixCoord[i][0] + 1, "#00FF00");
         }
     }
-
 
    drawToken(x, y, color) {
         let centerX = (x * this.squareSize) + (this.squareSize / 2);
@@ -189,35 +191,31 @@ class View {
         this.ctxTokens.fill();
     }
 
+    drawToken2(x, y, color) {
+        return new Promise(resolve => {
+            let centerX = (x * this.squareSize) + (this.squareSize / 2);
+            let yPos = 0;
+            let yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
 
-    drawToken2(x, y, color, sens) {
-        let centerX = (x * this.squareSize) + (this.squareSize / 2);
-        let yPos = 0;
-        let yfinal = (y * this.squareSize) + (this.squareSize / 2) - 30;
+            let tileSize = (this.squareSize * 0.8) / 2;
 
-        let tileSize = (this.squareSize * 0.8) / 2;
+            let b = setInterval(() => {draw()},8);
 
+            let draw = () => {
+                this.clearToken(x * 60, yPos-1);
 
-        let b = setInterval(() => {draw()},8);
+                this.ctxTokens.beginPath();
+                this.ctxTokens.arc(centerX, yPos + 30, tileSize, 0, Math.PI * 2);
+                this.ctxTokens.fillStyle = color;
+                this.ctxTokens.fill();
 
-        let draw = () => {
-            console.log("cc");
-            this.clearToken(x * 60, yPos-1);
-
-
-            this.ctxTokens.beginPath();
-            this.ctxTokens.arc(centerX, yPos + 30, tileSize, 0, Math.PI * 2);
-            this.ctxTokens.fillStyle = color;
-            this.ctxTokens.fill();
-
-            if (yPos == yfinal){
-                clearInterval(b);
+                if (yPos == yfinal){
+                    clearInterval(b);
+                    resolve();
+                }
+                yPos+=6;
             }
-
-            yPos+=6;
-
-        }
-
+        });
     }
 
     clearToken(x, y) {
